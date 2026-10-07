@@ -6,7 +6,7 @@ Personal portfolio, based on [GitProfile](https://github.com/arifszn/gitprofile)
 
 Everything lives in **`gitprofile.config.ts`**: skills, experience, education, socials, the repos to feature, theme. Search it for `TODO`.
 
-To add a résumé, put `resume.pdf` in `public/` and set `resume.fileUrl` to `'/resume.pdf'`.
+To add a résumé, upload a PDF to `public/` with "resume" or "cv" in its name (e.g. `public/resume.pdf`). The site finds it automatically and shows a Résumé card with **Preview** (opens in the browser's PDF viewer) and **Download**. Delete the file to remove the card. `resume.fileUrl` in the config is only needed for a differently named file or a PDF hosted elsewhere.
 
 ## Run locally
 

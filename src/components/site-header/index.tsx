@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react';
 import { AiFillGithub } from 'react-icons/ai';
 import { PiPaintBucket } from 'react-icons/pi';
 import { RiComputerLine, RiMoonLine, RiSunLine } from 'react-icons/ri';
+import { CONTAINER } from '../../constants';
 import { ACCENTS, ACCENT_STORAGE_KEY } from '../../constants/accents';
 import { SanitizedThemeConfig } from '../../interfaces/sanitized-config';
 
@@ -78,7 +79,7 @@ const SiteHeader = ({
 
   return (
     <header className="pointer-events-none fixed inset-x-0 top-0 z-50">
-      <div className="mx-auto flex max-w-7xl items-center justify-end gap-2 px-4 pt-4 lg:px-10">
+      <div className={`${CONTAINER} flex items-center justify-end gap-2 pt-4`}>
         {!themeConfig.disableSwitch && (
           <>
             <Popover>

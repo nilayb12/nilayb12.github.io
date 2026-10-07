@@ -76,6 +76,8 @@ export async function getGithubData(
           stargazers_count: r.stargazers_count,
           forks_count: r.forks_count,
           language: r.language,
+          homepage: r.homepage,
+          has_pages: r.has_pages,
         }));
         // Keep the order you listed in manual mode
         if (gh.mode !== 'automatic') {

@@ -14,11 +14,13 @@ import { getSanitizedConfig, setupHotjar } from '../utils';
 import { SanitizedConfig } from '../interfaces/sanitized-config';
 import ErrorPage from './error-page';
 import SiteHeader from './site-header';
-import { BG_COLOR } from '../constants';
+import { BG_COLOR, CONTAINER } from '../constants';
 import AvatarCard from './avatar-card';
 import { Profile } from '../interfaces/profile';
 import DetailsCard from './details-card';
 import SkillCard from './skill-card';
+import ResumeCard from './resume-card';
+import type { ResumeInfo } from '../interfaces/resume';
 import type { ResolvedSkillIcon } from '../interfaces/skill-icon';
 import ExperienceCard from './experience-card';
 import EducationCard from './education-card';
@@ -83,10 +85,12 @@ const GitProfileContent = ({
   sanitizedConfig,
   initialData,
   skillIcons,
+  resume,
 }: {
   sanitizedConfig: SanitizedConfig;
   initialData?: InitialGithubData | null;
   skillIcons: Record<string, ResolvedSkillIcon>;
+  resume: ResumeInfo | null;
 }) => {
   const [error, setError] = useState<CustomError | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -237,7 +241,7 @@ const GitProfileContent = ({
             }
           />
           <div
-            className={`mx-auto max-w-7xl px-4 pb-4 pt-20 lg:px-10 lg:pb-10 lg:pt-24 ${BG_COLOR}`}
+            className={`${CONTAINER} pb-4 pt-20 lg:pb-10 lg:pt-24 ${BG_COLOR}`}
           >
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
               <div className="col-span-1">
@@ -246,8 +250,13 @@ const GitProfileContent = ({
                     profile={profile}
                     loading={loading}
                     avatarRing={sanitizedConfig.themeConfig.displayAvatarRing}
-                    resumeFileUrl={sanitizedConfig.resume.fileUrl}
                   />
+                  {resume && (
+                    <ResumeCard
+                      resume={resume}
+                      googleAnalyticsId={sanitizedConfig.googleAnalytics.id}
+                    />
+                  )}
                   <DetailsCard
                     profile={profile}
                     loading={loading}
@@ -357,11 +366,14 @@ const GitProfile = ({
   config,
   initialData,
   skillIcons = {},
+  resume = null,
 }: {
   config: Config;
   initialData?: InitialGithubData | null;
   /** Tech stack icons, resolved at build time (src/lib/skill-icons.server.ts). */
   skillIcons?: Record<string, ResolvedSkillIcon>;
+  /** The résumé PDF found at build time (src/lib/resume.server.ts). */
+  resume?: ResumeInfo | null;
 }) => {
   const [sanitizedConfig] = useState<SanitizedConfig | Record<string, never>>(
     getSanitizedConfig(config),
@@ -382,6 +394,7 @@ const GitProfile = ({
       sanitizedConfig={sanitizedConfig}
       initialData={initialData}
       skillIcons={skillIcons}
+      resume={resume}
     />
   );
 };

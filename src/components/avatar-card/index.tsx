@@ -1,5 +1,4 @@
-import { Avatar, Card, buttonVariants } from '@heroui/react';
-import { RiDownloadLine } from 'react-icons/ri';
+import { Avatar, Card } from '@heroui/react';
 import { FALLBACK_IMAGE } from '../../constants';
 import { Profile } from '../../interfaces/profile';
 import { skeleton } from '../../utils';
@@ -14,18 +13,16 @@ const initials = (name: string) =>
     .toUpperCase();
 
 /**
- * Profile picture, name, bio and résumé button.
+ * Profile picture, name and bio.
  */
 const AvatarCard = ({
   profile,
   loading,
   avatarRing,
-  resumeFileUrl,
 }: {
   profile: Profile | null;
   loading: boolean;
   avatarRing: boolean;
-  resumeFileUrl?: string;
 }) => {
   const isLoading = loading || !profile;
 
@@ -61,25 +58,6 @@ const AvatarCard = ({
             : profile.bio}
         </Card.Description>
       </Card.Header>
-
-      {resumeFileUrl && (
-        <Card.Footer className="mt-4 justify-center">
-          {isLoading ? (
-            skeleton({ widthCls: 'w-40', heightCls: 'h-9' })
-          ) : (
-            <a
-              href={resumeFileUrl}
-              target="_blank"
-              rel="noreferrer"
-              download
-              className={buttonVariants({ variant: 'secondary', size: 'sm' })}
-            >
-              <RiDownloadLine />
-              Download résumé
-            </a>
-          )}
-        </Card.Footer>
-      )}
     </Card>
   );
 };
