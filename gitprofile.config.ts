@@ -100,6 +100,8 @@ const CONFIG = {
     'GitHub Actions',
   ],
 
+  // Most recent first. `description` can be a list (bullet points) or a
+  // single string (paragraph). Keep each point to one line if you can.
   experiences: [
     {
       company: 'Jio Platforms',
@@ -107,6 +109,14 @@ const CONFIG = {
       from: 'Month YYYY', // TODO
       to: 'Present',
       companyLink: 'https://www.jio.com/platforms',
+      // TODO: review — keep only what you're comfortable making public.
+      description: [
+        'Designed a sector-packing algorithm on Databricks that models sector coverage geometry at national scale.',
+        'Built a pipeline ingesting interference reference-signal traces into the central data lake for RIM analysis.',
+        'Delivered RAN KPI analytics across Ericsson, Nokia and Samsung equipment.',
+        'Built a map-based web app for visualising sector coverage across India.',
+        'Administer the TRAI MySpeed server (Apache, Node.js, WebRTC).',
+      ],
     },
   ],
 
@@ -123,6 +133,8 @@ const CONFIG = {
       degree: 'Degree', // TODO
       from: 'YYYY',
       to: 'YYYY',
+      // Optional, e.g. 'Specialisation in signal processing'
+      description: '',
     },
   ],
 
@@ -160,6 +172,9 @@ const CONFIG = {
     // Starting accent colour (any CSS colour). Visitors can also pick a
     // palette from the "Theme" button. Empty = HeroUI's default blue.
     accentColor: '',
+    // Tech stack icons: 'brand' (official logo colours), 'accent' (your
+    // accent colour, matching the chips), or 'none'.
+    skillIcons: 'brand' as 'brand' | 'accent' | 'none',
   },
 
   // Plain text or HTML. Keeping the credit is appreciated (MIT licence).

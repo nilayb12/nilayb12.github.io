@@ -119,6 +119,11 @@ export const getSanitizedConfig = (
         disableSwitch: config?.themeConfig?.disableSwitch || false,
         displayAvatarRing: config?.themeConfig?.displayAvatarRing ?? true,
         accentColor: config?.themeConfig?.accentColor || '',
+        skillIcons: (['brand', 'accent', 'none'] as const).includes(
+          config?.themeConfig?.skillIcons as 'brand',
+        )
+          ? (config.themeConfig!.skillIcons as 'brand' | 'accent' | 'none')
+          : 'brand',
       },
       header: {
         githubCount: (['stars', 'followers', 'none'] as const).includes(

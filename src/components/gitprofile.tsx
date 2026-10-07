@@ -19,6 +19,7 @@ import AvatarCard from './avatar-card';
 import { Profile } from '../interfaces/profile';
 import DetailsCard from './details-card';
 import SkillCard from './skill-card';
+import type { ResolvedSkillIcon } from '../interfaces/skill-icon';
 import ExperienceCard from './experience-card';
 import EducationCard from './education-card';
 import CertificationCard from './certification-card';
@@ -81,9 +82,11 @@ const formatRateLimitReset = (error: AxiosError): string | null => {
 const GitProfileContent = ({
   sanitizedConfig,
   initialData,
+  skillIcons,
 }: {
   sanitizedConfig: SanitizedConfig;
   initialData?: InitialGithubData | null;
+  skillIcons: Record<string, ResolvedSkillIcon>;
 }) => {
   const [error, setError] = useState<CustomError | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -255,6 +258,8 @@ const GitProfileContent = ({
                     <SkillCard
                       loading={loading}
                       skills={sanitizedConfig.skills}
+                      icons={skillIcons}
+                      iconStyle={sanitizedConfig.themeConfig.skillIcons}
                     />
                   )}
                   {sanitizedConfig.experiences.length !== 0 && (
@@ -351,9 +356,12 @@ const isValidConfig = (
 const GitProfile = ({
   config,
   initialData,
+  skillIcons = {},
 }: {
   config: Config;
   initialData?: InitialGithubData | null;
+  /** Tech stack icons, resolved at build time (src/lib/skill-icons.server.ts). */
+  skillIcons?: Record<string, ResolvedSkillIcon>;
 }) => {
   const [sanitizedConfig] = useState<SanitizedConfig | Record<string, never>>(
     getSanitizedConfig(config),
@@ -373,6 +381,7 @@ const GitProfile = ({
     <GitProfileContent
       sanitizedConfig={sanitizedConfig}
       initialData={initialData}
+      skillIcons={skillIcons}
     />
   );
 };

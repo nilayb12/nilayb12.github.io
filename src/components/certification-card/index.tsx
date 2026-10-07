@@ -1,3 +1,4 @@
+import { TbCertificate } from 'react-icons/tb';
 import { SanitizedCertification } from '../../interfaces/sanitized-config';
 import TimelineCard from '../timeline';
 
@@ -10,6 +11,7 @@ const CertificationCard = ({
 }) => (
   <TimelineCard
     heading="Certifications"
+    icon={<TbCertificate />}
     loading={loading}
     entries={certifications.map((c) => ({
       time: c.year,

@@ -75,6 +75,7 @@ export interface SanitizedExperience {
   from: string;
   to: string;
   companyLink?: string;
+  description?: string | string[];
 }
 
 export interface SanitizedCertification {
@@ -89,6 +90,7 @@ export interface SanitizedEducation {
   degree?: string;
   from: string;
   to: string;
+  description?: string | string[];
 }
 
 export interface SanitizedPublication {
@@ -121,6 +123,7 @@ export interface SanitizedThemeConfig {
   disableSwitch: boolean;
   displayAvatarRing: boolean;
   accentColor: string;
+  skillIcons: 'brand' | 'accent' | 'none';
 }
 
 export interface SanitizedConfig {

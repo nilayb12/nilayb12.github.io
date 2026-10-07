@@ -1,12 +1,42 @@
 import { Card } from '@heroui/react';
 import { skeleton } from '../../utils';
+import CardHeading from '../card-heading';
 
 export interface TimelineEntry {
   time: React.ReactNode;
   title?: React.ReactNode;
   subtitle?: React.ReactNode;
   link?: string;
+  /** A list renders as bullet points; a string as a paragraph. */
+  description?: string | string[];
 }
+
+const Description = ({ value }: { value: string | string[] }) => {
+  const items = (Array.isArray(value) ? value : [value])
+    .map((v) => v.trim())
+    .filter(Boolean);
+  if (items.length === 0) return null;
+  if (!Array.isArray(value)) {
+    return (
+      <p className="mt-2 text-sm leading-relaxed text-foreground/80">
+        {items[0]}
+      </p>
+    );
+  }
+  return (
+    <ul className="mt-2 space-y-1.5 text-sm leading-relaxed text-foreground/80">
+      {items.map((item, i) => (
+        <li key={i} className="flex gap-2">
+          <span
+            aria-hidden
+            className="mt-[0.6em] size-1 shrink-0 rounded-full bg-muted"
+          />
+          <span>{item}</span>
+        </li>
+      ))}
+    </ul>
+  );
+};
 
 /**
  * A card with a vertical timeline. Used for experience, education and
@@ -14,19 +44,19 @@ export interface TimelineEntry {
  */
 const TimelineCard = ({
   heading,
+  icon,
   entries,
   loading,
 }: {
   heading: string;
+  icon: React.ReactNode;
   entries: TimelineEntry[];
   loading: boolean;
 }) => (
   <Card>
-    <Card.Header>
-      <Card.Title>
-        {loading ? skeleton({ widthCls: 'w-32', heightCls: 'h-6' }) : heading}
-      </Card.Title>
-    </Card.Header>
+    <CardHeading icon={icon} loading={loading}>
+      {heading}
+    </CardHeading>
     <Card.Content>
       <ol className="relative ms-1.5 border-s border-separator">
         {(loading ? Array.from({ length: 2 }, () => null) : entries).map(
@@ -67,6 +97,7 @@ const TimelineCard = ({
                       )}
                     </div>
                   )}
+                  {e.description && <Description value={e.description} />}
                 </>
               )}
             </li>

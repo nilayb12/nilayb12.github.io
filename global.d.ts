@@ -221,6 +221,11 @@ interface Experience {
   from: string;
   to: string;
   companyLink?: string;
+  /**
+   * What you did in the role. A list of strings renders as bullet points;
+   * a single string renders as a paragraph.
+   */
+  description?: string | string[];
 }
 
 interface Certification {
@@ -235,6 +240,10 @@ interface Education {
   degree?: string;
   from: string;
   to: string;
+  /**
+   * Optional: grade, specialisation, thesis, etc. A list renders as bullets.
+   */
+  description?: string | string[];
 }
 
 interface Publication {
@@ -304,6 +313,12 @@ interface ThemeConfig {
    * Brand/accent colour (any CSS colour). Empty keeps HeroUI's default blue.
    */
   accentColor?: string;
+
+  /**
+   * Tech stack icons: 'brand' (official logo colours), 'accent' (your accent
+   * colour), or 'none'
+   */
+  skillIcons?: 'brand' | 'accent' | 'none';
 }
 
 interface HeaderConfig {

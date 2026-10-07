@@ -31,6 +31,12 @@ npm run build      # static site in ./out
 - **UI rebuilt with HeroUI v3** instead of daisyUI: every card uses HeroUI's `Card`, `Chip`, `Avatar`, `Skeleton` and button styles. daisyUI's 36-theme dropdown is replaced by a Light / Dark / System switch (HeroUI's `useTheme`).
 - Experience, education and certifications share one timeline component (`src/components/timeline`).
 
+## Tech stack icons
+
+Icons are found automatically when the site builds: each name in `skills` is matched against the 3,400+ logos in [Simple Icons](https://simpleicons.org), with official brand colours. Spell tools the way the brand does ('Terraform', 'Kubernetes', 'C++').
+
+If the build log in GitHub Actions shows `[skills] No icon found for: …`, add the skill to `src/constants/skill-icons.ts`: under `SKILL_ALIASES` to point it at a different logo, or under `SKILL_GENERIC` to give it a generic icon. Icon style is set by `themeConfig.skillIcons`: `'brand'`, `'accent'` or `'none'`.
+
 ## Header
 
 A fixed, transparent header in the top-right corner (`src/components/site-header`) holds:

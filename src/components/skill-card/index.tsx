@@ -1,21 +1,26 @@
 import { Card, Chip } from '@heroui/react';
+import { TbStack2 } from 'react-icons/tb';
+import type { ResolvedSkillIcon } from '../../interfaces/skill-icon';
+import SkillIcon, { SkillIconStyle } from '../skill-icon';
 import { skeleton } from '../../utils';
+import CardHeading from '../card-heading';
 
 const SkillCard = ({
   loading,
   skills,
+  icons,
+  iconStyle,
 }: {
   loading: boolean;
   skills: string[];
+  /** Icons resolved at build time, keyed by skill name. */
+  icons: Record<string, ResolvedSkillIcon>;
+  iconStyle: SkillIconStyle;
 }) => (
   <Card>
-    <Card.Header>
-      <Card.Title>
-        {loading
-          ? skeleton({ widthCls: 'w-32', heightCls: 'h-6' })
-          : 'Tech stack'}
-      </Card.Title>
-    </Card.Header>
+    <CardHeading icon={<TbStack2 />} loading={loading}>
+      Tech stack
+    </CardHeading>
     <Card.Content>
       <div className="flex flex-wrap gap-2">
         {loading
@@ -25,7 +30,15 @@ const SkillCard = ({
               </div>
             ))
           : skills.map((skill) => (
-              <Chip key={skill} color="accent" variant="soft" size="sm">
+              <Chip
+                key={skill}
+                // Brand-coloured logos sit on neutral chips so they don't clash with the accent
+                color={iconStyle === 'brand' ? 'default' : 'accent'}
+                variant="soft"
+                size="sm"
+                className="gap-1.5"
+              >
+                <SkillIcon icon={icons[skill]} style={iconStyle} />
                 {skill}
               </Chip>
             ))}

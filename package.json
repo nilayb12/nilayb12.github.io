@@ -20,7 +20,8 @@
     "react-aria": "^3.52.1",
     "react-aria-components": "^1.21.1",
     "react-dom": "^19.2.8",
-    "server-only": "^0.0.1"
+    "server-only": "^0.0.1",
+    "simple-icons": "^16.34.0"
   },
   "devDependencies": {
     "@arifszn/blog-js": "^2.0.6",
